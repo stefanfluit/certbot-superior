@@ -1,7 +1,4 @@
-
-`certificates.datlinq.com`
-==========
-Installation and user guide.
+Installation and user guide for certbot-superior.
 
 Installation
 ===========
