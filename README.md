@@ -6,7 +6,7 @@ Installation
 In a terminal of Linux distro of your choice:  
 
 ```
-$ mkdir -pv /var/lib/repos && cd /var/lib/repos && git clone https://github.com/stefanfluit/certbot-superior.git
+$ mkdir -pv /var/lib/repos && cd /var/lib/repos && git clone --recursive https://github.com/stefanfluit/certbot-superior.git
 ```
 
 Launch the configure file, this will configure all the files and programs we need.
