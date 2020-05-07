@@ -6,13 +6,13 @@ Installation
 In a terminal of Linux distro of your choice:  
 
 ```
-$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/stefanfluit/certbot-superior/master/configure.sh)"
+$ mkdir -pv /var/lib/repos && cd /var/lib/repos && git clone https://github.com/stefanfluit/certbot-superior.git
 ```
 
-This will configure all the files and programs we need. You can now check the service:
+Launch the configure file, this will configure all the files and programs we need.
 
 ```
-$ systemctl status certbot-superior.service
+$ ./configure.sh
 ```
 
 Make sure to edit the files in /var/lib/scripts, to make sure you set the right API key and other variables.
@@ -33,7 +33,11 @@ And:
 $ vim /var/lib/scripts/prehook.sh
 ```
 
-Systemd will now check every night 01:00 if there is a need to renew the cert.
+Systemd will now check every night 01:00 if there is a need to renew the cert. Check with: 
+
+```
+$ systemctl status certbot-superior.service
+```
 
 It defaults to seven days, so if the certificate from a certain host expires in <7 days, it initiates a renewal.
 
