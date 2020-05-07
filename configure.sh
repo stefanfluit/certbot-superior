@@ -2,8 +2,9 @@
 
 # This script makes sure that all the files are in the right directories. 
 
-# Setting Bash behaviour to make sure the script will exit on error.
-set -exo pipefail
+# Set Bash behaviour
+set -o errexit      #Exit on uncaught errors
+set -o pipefail 	#Fail pipe on first error
 
 # Run with --update flag to update all files. 
 
