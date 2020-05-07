@@ -15,7 +15,6 @@ if [ "${1}" == '--update' ]; then
     systemctl daemon-reload
 else
     mkdir -pv /var/lib/scripts
-    mkdir -pv /var/lib/repos && git clone --recursive https://github.com/stefanfluit/certbot-superior.git
     cp -a /var/lib/repos/certbot-superior/scripts/. /var/lib/scripts/
     cp -a /var/lib/repos/certbot-superior/systemd/. /etc/systemd/system/
     systemctl daemon-reload && systemctl start certbot-superior.timer
