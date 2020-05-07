@@ -1,0 +1,7 @@
+[Unit]
+Description=certbot-superior
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /var/lib/scripts/test-date.sh

@@ -1,0 +1,10 @@
+[Unit]
+Description=certbot-superior
+
+[Timer]
+OnCalendar=0/1:00:00
+Unit=certbot-superior.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target
