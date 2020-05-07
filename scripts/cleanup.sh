@@ -4,9 +4,9 @@
 # To update token simply edit the variable. 
 # Documentation can be aquired via Superior support.
 
-# Set Bash behaviour
-set -o errexit      #Exit on uncaught errors
-set -o pipefail 	#Fail pipe on first error
+# Setting Bash behaviour to make sure the script will exit on error, we want to prevent useless API calls.
+# No fail on unset variables since that would break the script because Certbot will set $CERTBOT_x variables.
+set -exo pipefail
 
 # Lower case variables declared here, upper case variables are set by Certbot.
 # API Variables
