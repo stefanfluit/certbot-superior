@@ -31,4 +31,4 @@ remove_txt_id=$(cat "${json_tmp}" | jq .records | grep _acme -B2 | grep id | gre
 # Using Curl command to to remove the used record. $CERTBOT_x variables are set by Certbot.
 curl --data \
 "customer_id=${user_token}&key=${api_token}&action=del-ns-record&domain=${CERTBOT_DOMAIN}&record_id=${remove_txt_id}" \
- -X POST https://www.klantsysteem.nl/api/ 
+ -X POST https://www.klantsysteem.nl/api/

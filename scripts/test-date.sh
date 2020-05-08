@@ -31,6 +31,6 @@ for domain_name in "${domain_names[@]}"; do
         printf "No need to renew certificate.\n"
         exit
     else
-        sh -c /var/lib/scripts/certbot-auto-renew.sh
+        sh -c /var/lib/scripts/certbot-auto-renew.sh "${domain_name}"
     fi
 done
