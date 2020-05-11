@@ -7,17 +7,11 @@ set -exo pipefail
 # Initiated by Systemd, but you can run this manually for testing purposes. Add --test flag and domain to test, eg "./certbot-auto-renew.sh --test webserver.example.com"
 
 # Variables
-# This is the path to the certbot repo. I expect it in /var/lib/repos.
-declare DIR_
-DIR_="/var/lib/repos/certbot-superior/certbot"
 declare admin_email
 admin_email="admin.example.com"
 # Variable to house the test domain variable.
 declare test_domain
 test_domain="${2}"
-
-# CD into working directory and exit if not found. 
-cd "${DIR_}" || printf "Error, %s not found\n" "${DIR_}" && exit 
 
 # Define array of domains to loop through, passed through parameters from test-date.sh.
 declare -a domain_names=("${@}")
