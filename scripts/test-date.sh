@@ -12,9 +12,11 @@ variable_file="/var/lib/repos/certbot-superior/files/domain_names.txt"
 readarray -t domain_names < "${variable_file}"
 
 for domain_name in "${domain_names[@]}"; do
+    declare temp_var
+    temp_var=$(echo "${domain_name}" | cut -d"." -f2,3)
     declare certificate_file
     certificate_file=$(mktemp)
-    echo -n | openssl s_client -servername "${domain_name}" -connect "${domain_name}":443 2>/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > "${certificate_file}"
+    echo -n | openssl s_client -servername "${temp_var}" -connect "${temp_var}":443 2>/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > "${certificate_file}"
     declare date
     date=$(openssl x509 -in "${certificate_file}" -enddate -noout | sed "s/.*=\(.*\)/\1/")
     declare date_s
@@ -25,12 +27,11 @@ for domain_name in "${domain_names[@]}"; do
     date_diff=$(( (date_s - now_s) / 86400 ))
     declare days_to_renew
     days_to_renew="7"
-    # Print out the amount of days. If it equeals less than seven, we will go for a renewal. 
-    printf "%s will expire in %s days\n" "${domain_name}" "${date_diff}"
+    #Print out the amount of days. If it equeals less than seven, we will go for a renewal. 
+    printf "%s will expire in %s days\n" "${temp_var}" "${date_diff}"
     if [ "${date_diff}" -gt "${days_to_renew}" ]; then
-        printf "No need to renew certificate.\n"
-        exit
+        printf "No need to renew certificate for domain %s.\n" "${temp_var}"
     else
-        sh -c /var/lib/scripts/certbot-auto-renew.sh "${domain_name}"
+        sh -c /var/lib/scripts/certbot-auto-renew.sh "${temp_var}"
     fi
 done
